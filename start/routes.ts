@@ -25,4 +25,14 @@ Route.get('/', async ({ view }) => {
 })
 */
 
+Route.group(() => {
+  Route.group(() => {
+    Route.group(() => {
+      Route.get('login', async ({ response }) => response.send('it worked!'))
+      Route.post('login', 'AuthController.login')
+      Route.post('logout', 'AuthController.logout')
+    }).prefix('/auth')
+  }).prefix('/v1')
+}).prefix('/api')
+
 Route.get('/', async ({ inertia }) => inertia.render('Index', { title: 'Hello World!' }))
